@@ -109,7 +109,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String detail(Model model, int id) {
 		
-		Article article = articleServise.getArticle(id);
+		Article article = articleServise.getForPrintArticle(id);
 		
 		model.addAttribute("article", article);
 		

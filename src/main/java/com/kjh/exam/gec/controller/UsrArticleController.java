@@ -2,7 +2,7 @@ package com.kjh.exam.gec.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import com.kjh.exam.gec.service.ArticleService;
 import com.kjh.exam.gec.util.Utility;
 import com.kjh.exam.gec.vo.Article;
 import com.kjh.exam.gec.vo.ResultData;
+import com.kjh.exam.gec.vo.Rq;
 
 @Controller
 public class UsrArticleController {
@@ -27,13 +28,13 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(HttpSession httpSession, String title, String body) {
+	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		
-		if(httpSession.getAttribute("loginedMemberId") == null) {
+		Rq rq = new Rq(req);
+		
+		if(rq.getLoginedMemberId() == 0) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
-		
-		int loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		
 		if(Utility.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요");
@@ -43,7 +44,7 @@ public class UsrArticleController {
 			return ResultData.from("F-2", "내용을 입력해주세요");
 		}
 		
-		ResultData writeArticleRd = articleServise.writeArticle(loginedMemberId, title, body);
+		ResultData writeArticleRd = articleServise.writeArticle(rq.getLoginedMemberId(), title, body);
 		
 		Article article = articleServise.getArticle((int) writeArticleRd.getData1());
 		
@@ -62,13 +63,13 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpSession httpSession, int id) {
+	public String doDelete(HttpServletRequest req, int id) {
 		
-		if(httpSession.getAttribute("loginedMemberId") == null) {
+		Rq rq = new Rq(req);
+		
+		if(rq.getLoginedMemberId() == 0) {
 			return Utility.jsHistoryBack("로그인 후 이용해주세요");
 		}
-		
-		int loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		
 		Article article = articleServise.getArticle(id);
 		
@@ -76,7 +77,7 @@ public class UsrArticleController {
 			return Utility.jsHistoryBack(Utility.f("%d번 게시물은 존재하지 않습니다", id));
 		}
 		
-		if(loginedMemberId != article.getMemberId()) {
+		if(rq.getLoginedMemberId() != article.getMemberId()) {
 			return Utility.jsHistoryBack("해당 게시물에 대한 권한이 없습니다"); 
 		}
 		
@@ -87,13 +88,13 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify(HttpSession httpSession, int id, String title, String body) {
+	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 		
-		if(httpSession.getAttribute("loginedMemberId") == null) {
+		Rq rq = new Rq(req);
+		
+		if(rq.getLoginedMemberId() == 0) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
-		
-		int loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		
 		Article article = articleServise.getArticle(id);
 		
@@ -101,21 +102,17 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다", id));
 		}
 		
-		ResultData actorCanModifyRd = articleServise.actorCanMD(loginedMemberId, article);
+		ResultData actorCanModifyRd = articleServise.actorCanMD(rq.getLoginedMemberId(), article);
 		
 		return articleServise.modifyArticle(id, title, body);
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String detail(HttpSession httpSession, Model model, int id) {
+	public String detail(HttpServletRequest req, Model model, int id) {
 		
-		int loginedMemberId = 0;
+		Rq rq = new Rq(req);
 		
-		if(httpSession.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-		
-		Article article = articleServise.getForPrintArticle(loginedMemberId, id);
+		Article article = articleServise.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		model.addAttribute("article", article);
 		

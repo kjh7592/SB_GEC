@@ -51,8 +51,8 @@ title = '에픽3',
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-loginId = '에픽1',
-loginPw = '강화1',
+loginId = 'admin',
+loginPw = 'admin',
 `authLevel` = '7',
 `name` = '관리자',
 nickname = '관리자',
@@ -83,3 +83,9 @@ SELECT * FROM article;
 SELECT * FROM `member`;
 
 SELECT LAST_INSERT_ID();
+
+ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
+
+UPDATE article
+SET memberId = 2
+WHERE memberId = 0;

@@ -142,6 +142,7 @@
 								<span>(수치는 숫자만 입력)</<span>
 							</th>
 							<td>
+<!-- 							count값 받아서 반복문으로 코드 줄일 수 있을 듯(ajax로 처리) -->
 								<select name="oT" class="my-1 w-40 text-center">
 									<option selected disabled hidden>== 옵션 선택 ==</option>
 									<option value="치확">치확</option>
@@ -153,7 +154,7 @@
 									<option value="효적">효적</option>
 									<option value="효저">효저</option>
 								</select>
-								<input class="w-24" type="text" name="size" placeholder="숫자 입력" />
+								<input class="w-20" type="text" name="size" placeholder="숫자 입력" />
 								<br />
 								<select name="oT" class="my-1 w-40 text-center">
 									<option selected disabled hidden>== 옵션 선택 ==</option>
@@ -166,7 +167,7 @@
 									<option value="효적">효적</option>
 									<option value="효저">효저</option>
 								</select>
-								<input class="w-24" type="text" name="size" placeholder="숫자 입력" />
+								<input class="w-20" type="text" name="size" placeholder="숫자 입력" />
 								<br />
 								<select name="oT" class="my-1 w-40 text-center">
 									<option selected disabled hidden>== 옵션 선택 ==</option>
@@ -179,7 +180,7 @@
 									<option value="효적">효적</option>
 									<option value="효저">효저</option>
 								</select>
-								<input class="w-24" type="text" name="size" placeholder="숫자 입력" />
+								<input class="w-20" type="text" name="size" placeholder="숫자 입력" />
 								<c:if test="count == 4">
 									<select name="oT" class="my-1 w-40 text-center">
 										<option selected disabled hidden>== 옵션 선택 ==</option>
@@ -192,7 +193,7 @@
 										<option value="효적">효적</option>
 										<option value="효저">효저</option>
 									</select>
-									<input class="w-24" type="text" name="size" placeholder="숫자 입력" />
+									<input class="w-20" type="text" name="size" placeholder="숫자 입력" />
 								</c:if>
 							</td>
 						</tr>

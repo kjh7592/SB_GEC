@@ -22,7 +22,7 @@
 					<div class="flex-grow"></div>
 					<ul class="flex">
 						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>HOME</span></a></li>
-						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>UPGRADE-STANDARD</span></a></li>
+						<li class="hover:underline"><a href="/usr/standard/UpgradeStandard" class="h-full px-3 flex items-center"><span>UPGRADE-STANDARD</span></a></li>
 						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>CALC</span></a></li>
 						<li class="hover:underline"><a href="/usr/article/list" class="h-full px-3 flex items-center"><span>LIST</span></a></li>
 						<li class="hover:underline"><a href="/usr/member/login" class="h-full px-3 flex items-center"><span>LOGIN</span></a></li>

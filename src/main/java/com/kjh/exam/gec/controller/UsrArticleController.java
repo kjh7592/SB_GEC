@@ -101,15 +101,21 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다", id));
 		}
 		
-		ResultData actorCanModifyRd = articleServise.actorCanModify(loginedMemberId, article);
+		ResultData actorCanModifyRd = articleServise.actorCanMD(loginedMemberId, article);
 		
 		return articleServise.modifyArticle(id, title, body);
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String detail(Model model, int id) {
+	public String detail(HttpSession httpSession, Model model, int id) {
 		
-		Article article = articleServise.getForPrintArticle(id);
+		int loginedMemberId = 0;
+		
+		if(httpSession.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+		
+		Article article = articleServise.getForPrintArticle(loginedMemberId, id);
 		
 		model.addAttribute("article", article);
 		

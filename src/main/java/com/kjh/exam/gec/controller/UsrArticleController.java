@@ -24,20 +24,30 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public Article doAdd(String title, String body) {
+	public ResultData doAdd(String title, String body) {
 		
-		int id = articleServise.writeArticle(title, body);
+		if(Utility.empty(title)) {
+			return ResultData.from("F-1", "제목을 입력해주세요");
+		}
 		
-		Article article = articleServise.getArticle(id);
+		if(Utility.empty(body)) {
+			return ResultData.from("F-2", "내용을 입력해주세요");
+		}
 		
-		return article;
+		ResultData writeArticleRd = articleServise.writeArticle(title, body);
+		
+		Article article = articleServise.getArticle((int) writeArticleRd.getData1());
+		
+		return ResultData.from(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), article);
 	}
 	
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public List<Article> getArticles() {
+	public ResultData getArticles() {
 		
-		return articleServise.getArticles();
+		List<Article> articles = articleServise.getArticles();
+		
+		return ResultData.from("S-1", "게시물 리스트", articles);
 	}
 	
 	@RequestMapping("/usr/article/doDelete")

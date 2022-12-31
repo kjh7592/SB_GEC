@@ -50,7 +50,7 @@ public class UsrArticleController {
 		return ResultData.from(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "article", article);
 	}
 	
-	@RequestMapping("/usr/article/showList")
+	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
 		
 		List<Article> articles = articleServise.getArticles();
@@ -106,17 +106,14 @@ public class UsrArticleController {
 		return articleServise.modifyArticle(id, title, body);
 	}
 	
-	@RequestMapping("/usr/article/getArticle")
-	@ResponseBody
-	public ResultData<Article> getArticle(int id) {
+	@RequestMapping("/usr/article/detail")
+	public String detail(Model model, int id) {
 		
 		Article article = articleServise.getArticle(id);
 		
-		if(article == null) {
-			return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다", id));
-		}
+		model.addAttribute("article", article);
 		
-		return ResultData.from("S-1", Utility.f("%d번 게시물 입니다", id), "article", article);
+		return "usr/article/detail";
 	}
 
 }

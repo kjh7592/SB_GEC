@@ -17,13 +17,15 @@
 </head>
 <body>
 		<header>
-				<div class="h-20 flex container mx-auto text-4xl">
-					<a href="#" class="h-full px-3 flex items-center"><span>로고</span></a>
+				<div class="h-20 flex container mx-auto text-2xl">
+					<a class="h-full px-3 flex items-center" href="#" ><span>로고</span></a>
 					<div class="flex-grow"></div>
 					<ul class="flex">
-						<li class="hover:underline"><a href="" herf="/" class="h-full px-3 flex itmes-center"><span>HOME</span></a></li>
-						<li class="hover:underline"><a href="" herf="/" class="h-full px-3 flex itmes-center"><span>UPGRADE-STANDARD</span></a></li>
-						<li class="hover:underline"><a href="" herf="/" class="h-full px-3 flex itmes-center"><span>CALC</span></a></li>
+						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>HOME</span></a></li>
+						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>UPGRADE-STANDARD</span></a></li>
+						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>CALC</span></a></li>
+						<li class="hover:underline"><a href="/usr/article/list" class="h-full px-3 flex items-center"><span>LIST</span></a></li>
+						<li class="hover:underline"><a href="/usr/member/login" class="h-full px-3 flex items-center"><span>LOGIN</span></a></li>
 					</ul>
 				</div>
 		</header>

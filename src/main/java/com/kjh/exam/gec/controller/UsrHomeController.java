@@ -15,4 +15,14 @@ public class UsrHomeController {
 	public String showMain() {
 		return "안녕하세요";
 	}
+	
+//	@RequestMapping("/usr/home/main")
+//	public String showMain() {
+//		return "usr/home/main";
+//	}
+	
+	@RequestMapping("/")
+	public String showRoot() {
+		return "redirect:/usr/home/main";
+	}
 }

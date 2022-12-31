@@ -1,6 +1,7 @@
 package com.kjh.exam.gec.util;
 
 public class Utility {
+	
 	public static boolean empty(Object obj) {
 		
 		if(obj == null) {
@@ -19,4 +20,5 @@ public class Utility {
 	public static Object f(String format, Object... args) {
 		return String.format(format, args);
 	}
+
 }

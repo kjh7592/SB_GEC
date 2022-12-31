@@ -11,4 +11,4 @@ spring:
      username: root
      password:
 mybatis:
-  type-aliases-package: com.cjh.exam.demo.vo
+  type-aliases-package: com.kjh.exam.gec.vo

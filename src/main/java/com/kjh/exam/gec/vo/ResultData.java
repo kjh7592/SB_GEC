@@ -3,7 +3,6 @@ package com.kjh.exam.gec.vo;
 import lombok.Getter;
 
 public class ResultData {
-	
 	@Getter
 	// S-1, F-1, F-2 ...
 	private String resultCode;
@@ -16,7 +15,7 @@ public class ResultData {
 		return from(resultCode, msg, null);
 	}
 
-	private static ResultData from(String resultCode, String msg, Object data1) {
+	public static ResultData from(String resultCode, String msg, Object data1) {
 		ResultData rd = new ResultData();
 		rd.resultCode = resultCode;
 		rd.msg = msg;

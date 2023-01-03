@@ -48,6 +48,7 @@
 		<div class="btns mt-2">
 			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
 			<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="doDelete?id=${article.id }">삭제</a>
+		</div>
 	</div>
 </section>
 <%@ include file="../common/foot.jsp"%>

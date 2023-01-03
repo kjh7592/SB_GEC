@@ -63,18 +63,12 @@ public class UsrArticleController {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		
-		if(rq.getLoginedMemberId() == 0) {
-			return Utility.jsHistoryBack("로그인 후 이용해주세요");
-		}
-		
 		Article article = articleServise.getArticle(id);
 		
-		if(article == null) {
-			return Utility.jsHistoryBack(Utility.f("%d번 게시물은 존재하지 않습니다", id));
-		}
+		ResultData actorCanMDRd = articleServise.actorCanMD(rq.getLoginedMemberId(), article);
 		
-		if(rq.getLoginedMemberId() != article.getMemberId()) {
-			return Utility.jsHistoryBack("해당 게시물에 대한 권한이 없습니다"); 
+		if(actorCanMDRd.isFail()) {
+			return Utility.jsHistoryBack(actorCanMDRd.getMsg());
 		}
 		
 		articleServise.deleteArticle(id);
@@ -82,25 +76,41 @@ public class UsrArticleController {
 		return Utility.jsReplace(Utility.f("%d번 게시물을 삭제했습니다", id), "list");
 	}
 	
-	@RequestMapping("/usr/article/doModify")
-	@ResponseBody
-	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
+	@RequestMapping("/usr/article/modify")
+	public String showModify(HttpServletRequest req, Model model, int id) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		
-		if(rq.getLoginedMemberId() == 0) {
-			return ResultData.from("F-A", "로그인 후 이용해주세요");
+		Article article = articleServise.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		ResultData actorCanMDRd = articleServise.actorCanMD(rq.getLoginedMemberId(), article);
+		
+		if(actorCanMDRd.isFail()) {
+			return rq.jsReturnOnView(actorCanMDRd.getMsg(), true);
 		}
+		
+		model.addAttribute("article", article);
+		
+		return "usr/article/modify";
+	}
+	
+	@RequestMapping("/usr/article/doModify")
+	@ResponseBody
+	public String doModify(HttpServletRequest req, int id, String title, String body) {
+		
+		Rq rq = (Rq) req.getAttribute("rq");
 		
 		Article article = articleServise.getArticle(id);
 		
-		if(article == null) {
-			return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다", id));
+		ResultData actorCanMDRd = articleServise.actorCanMD(rq.getLoginedMemberId(), article);
+		
+		if(actorCanMDRd.isFail()) {
+			return Utility.jsHistoryBack(actorCanMDRd.getMsg());
 		}
 		
-		ResultData actorCanModifyRd = articleServise.actorCanMD(rq.getLoginedMemberId(), article);
+		articleServise.modifyArticle(id, title, body);
 		
-		return articleServise.modifyArticle(id, title, body);
+		return Utility.jsReplace(Utility.f("%d번 게시물을 수정했습니다", id), Utility.f("detail?id=%d", id));
 	}
 	
 	@RequestMapping("/usr/article/detail")

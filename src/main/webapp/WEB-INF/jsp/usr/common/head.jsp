@@ -27,7 +27,8 @@
 						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>HOME</span></a></li>
 						<li class="hover:underline"><a href="/usr/standard/UpgradeStandard" class="h-full px-3 flex items-center"><span>UPGRADE-STANDARD</span></a></li>
 						<li class="hover:underline"><a href="/" class="h-full px-3 flex items-center"><span>CALC</span></a></li>
-						<li class="hover:underline"><a href="/usr/article/list" class="h-full px-3 flex items-center"><span>LIST</span></a></li>
+						<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
+						<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
 						<c:if test="${rq.getLoginedMemberId() == 0 }">
 							<li class="hover:underline"><a href="/usr/member/login" class="h-full px-3 flex items-center"><span>LOGIN</span></a></li>
 						</c:if>

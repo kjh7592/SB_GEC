@@ -90,6 +90,17 @@ public class ArticleService {
 		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
+	public ResultData<Integer> increaseHitCount(int id) {
+		// 몇열에 적용됨의 열수를 나타냄
+		int affectedRowsCount = articleRepository.increaseHitCount(id);
+
+		if(affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다", "affectedRowsCount", affectedRowsCount);
+		}
+
+		return ResultData.from("S-1", "조회수 증가", "affectedRowsCount", affectedRowsCount);
+	}
+
 	
 
 }

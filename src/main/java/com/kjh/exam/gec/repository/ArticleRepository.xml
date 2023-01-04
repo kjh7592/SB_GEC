@@ -17,7 +17,6 @@
 		SELECT * 
 				FROM article 
 				WHERE id = #{id}
-		
 	</select>
 	
 	<select id="getArticlesCount" resultType="int">
@@ -78,8 +77,8 @@
 							)
 					</otherwise>
 				</choose>
-				ORDER BY id DESC
 			</if>
+			ORDER BY id DESC
 			LIMIT #{limitStart}, #{itemsInAPage}
 	</select>
 
@@ -101,5 +100,11 @@
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>
+	
+	<update id="increaseHitCount">
+		UPDATE article 
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
+	</update>
 	
 </mapper>

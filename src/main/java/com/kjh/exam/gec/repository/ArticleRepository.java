@@ -26,4 +26,6 @@ public interface ArticleRepository {
 	public int getLastInsertId();
 
 	public Article getForPrintArticle(int id);
+
+	public int getArticlesCount(int boardId);
 }

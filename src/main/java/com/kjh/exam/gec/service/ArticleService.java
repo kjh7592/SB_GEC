@@ -83,6 +83,10 @@ public class ArticleService {
 		article.setActorCanChangeData(actorCanChangeDataRd.isSuccess());
 	}
 
+	public int getArticlesCount(int boardId) {
+		return articleRepository.getArticlesCount(boardId);
+	}
+
 	
 
 }

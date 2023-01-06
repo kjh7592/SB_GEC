@@ -11,9 +11,12 @@
 		
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
 		
+		// 만약 이미 한번 조회수가 증가했다면 다음 조건에서 리턴으로 돌려보내고 밑에 실행 안됨
 		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
+		// 위에 조건을 fulsy(null 등으로)로 통과했다면 여기부터 실행 됨
+		// 첫 번째 실행 됐을 때 Key가 set되고 그때 true를 같이 set 해줌으로써 다음번에 같은 값의 Key가 들어오면 true가 되게끔 함 -> 위에 조건문이 true가 되서 return 발동
 		localStorage.setItem(localStorageKey, true);
 		
 		$.get('doIncreaseHitCountRd', {

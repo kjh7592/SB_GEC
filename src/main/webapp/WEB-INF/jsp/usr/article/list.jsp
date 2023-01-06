@@ -39,6 +39,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>조회수</th>
+						<th>추천</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -51,6 +52,7 @@
 							</td>
 							<td>${article.writerName}</td>
 							<td>${article.hitCount}</td>
+							<td>${article.sumReactionPoint}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -162,8 +162,12 @@ public class UsrArticleController {
 		if(increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
 		}
-
-		return ResultData.from(increaseHitCountRd.getResultCode(), increaseHitCountRd.getMsg(), "hitCount", articleService.getArticleHitCount(id));
+		
+		ResultData<Integer> rd = ResultData.from(increaseHitCountRd.getResultCode(), increaseHitCountRd.getMsg(), "hitCount", articleService.getArticleHitCount(id));
+		
+		rd.setData2("id", id);
+		
+		return rd;
 	}
 	
 }
